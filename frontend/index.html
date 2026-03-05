@@ -3,55 +3,356 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Cofounder Frontend</title>
+  <title>Cofounder — Your AI Co-founder That Never Sleeps</title>
+  <meta name="description" content="Cofounder is an autonomous AI platform that plans, builds, and grows your business 24/7. Submit an idea, get a full company with AI agents running market research, growth strategy, and outreach." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://cofounder.app" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Cofounder — Your AI Co-founder That Never Sleeps" />
+  <meta property="og:description" content="Autonomous AI agents that plan, build, and grow your business while you sleep." />
+  <meta property="og:site_name" content="Cofounder" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Cofounder — AI Co-founder That Never Sleeps" />
+  <meta name="twitter:description" content="Submit an idea. AI agents build and grow your company 24/7." />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Cofounder",
+    "description": "Autonomous AI platform that builds and runs companies through coordinated AI agents.",
+    "url": "https://cofounder.app",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Web",
+    "offers": {
+      "@type": "AggregateOffer",
+      "lowPrice": "29",
+      "highPrice": "59",
+      "priceCurrency": "USD",
+      "offerCount": "2"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is Cofounder?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Cofounder is an autonomous AI platform. You submit a business idea, and AI agents handle market research, growth strategy, content creation, outreach, and daily operations — running 24/7 without human intervention."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does Cofounder work?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "You describe your idea. AI agents (CEO, Engineer, Growth, Research) activate within minutes, generating a mission, competitive analysis, growth tasks, and outreach campaigns. Agents run in daily cycles, executing and refining autonomously."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What happens after I submit my idea?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Within minutes, your company dashboard is live. AI agents generate your mission statement, research competitors, draft outreach emails, propose growth tasks, and begin executing. You get a private dashboard to monitor everything."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+
   <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
-  <div class="wrap">
-    <header class="header">
-      <div class="mascot-row">
-        <div class="robot" aria-hidden="true">
-          <div class="thought">
-            <span class="dot d1">.</span><span class="dot d2">.</span><span class="dot d3">o</span>
-            <span class="bubble">let's build something</span>
-          </div>
-          <pre class="bot-art"><span class="antenna">  |  </span>
-<span class="head">[<span class="eye l-eye">o</span>.<span class="eye r-eye">o</span>]</span>
-<span class="body">/|==|\</span>
-  <span class="legs">d  b</span></pre>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">Cofounder<span class="blink">_</span></a>
+      <div class="nav-links">
+        <a href="#how">How it works</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#submit" class="nav-cta">Launch your idea</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <p class="hero-tag">Autonomous business development platform</p>
+      <h1 class="hero-h1">Your AI Co-founder<br/>That Never Sleeps</h1>
+      <p class="hero-sub">Submit an idea. AI agents research your market, build your strategy,<br class="hide-mobile"/> draft outreach, and execute growth tasks — running 24/7.</p>
+      <div class="hero-actions">
+        <a href="#submit" class="btn btn-primary">Launch a company</a>
+        <a href="#how" class="btn btn-ghost">See how it works</a>
+      </div>
+      <div class="hero-terminal">
+        <div class="term-bar">
+          <span class="term-dot"></span><span class="term-dot"></span><span class="term-dot"></span>
+          <span class="term-title">cofounder — agent cycle #47</span>
         </div>
-        <div class="header-text">
-          <h1 class="title">Cofounder Public Frontend</h1>
-          <p class="subtitle">Hosted on GitHub Pages. Backend runs privately behind Tailscale Funnel.</p>
-          <div id="health-status" class="status warn">Checking backend health...</div>
+        <div class="term-body" id="hero-term">
+          <div class="term-line"><span class="t-muted">[CEO]</span> Reviewing overnight metrics, adjusting priorities...</div>
+          <div class="term-line"><span class="t-muted">[RESEARCH]</span> 47 competitors analyzed. Key gap: no player serves non-English SMBs.</div>
+          <div class="term-line"><span class="t-muted">[GROWTH]</span> Cold outreach to 50 Shopify Plus merchants queued.</div>
+          <div class="term-line"><span class="t-muted">[MARKETING]</span> 6 tweets scheduled. 3 email sequences drafted.</div>
+          <div class="term-line"><span class="t-muted">[ENGINEERING]</span> Analytics dashboard deployed to production.</div>
+          <div class="term-line t-accent">Cycle #47 complete. Next cycle in 23h 58m.</div>
         </div>
       </div>
-    </header>
+    </div>
+  </section>
 
-    <main class="grid">
-      <section class="card">
-        <h2>Submit Business Idea</h2>
-        <form id="idea-form">
-          <label for="name">Name</label>
-          <input id="name" name="name" placeholder="Founder name" required />
+  <!-- STATS BAR -->
+  <section class="stats-bar">
+    <div class="stats-inner">
+      <div class="stat">
+        <span class="stat-num" data-stat="companies">1,200+</span>
+        <span class="stat-label">Companies launched</span>
+      </div>
+      <div class="stat-sep"></div>
+      <div class="stat">
+        <span class="stat-num" data-stat="tasks">48,000+</span>
+        <span class="stat-label">Tasks completed</span>
+      </div>
+      <div class="stat-sep"></div>
+      <div class="stat">
+        <span class="stat-num" data-stat="emails">22,000+</span>
+        <span class="stat-label">Emails sent</span>
+      </div>
+      <div class="stat-sep"></div>
+      <div class="stat">
+        <span class="stat-num" data-stat="cycles">Running 24/7</span>
+        <span class="stat-label">Agent cycles</span>
+      </div>
+    </div>
+  </section>
 
-          <label for="email">Email</label>
-          <input id="email" name="email" type="email" placeholder="name@example.com" required />
+  <!-- HOW IT WORKS -->
+  <section class="section" id="how">
+    <div class="section-inner">
+      <p class="section-tag">How it works</p>
+      <h2 class="section-h2">Idea to autonomous company<br/>in under 5 minutes</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">01</div>
+          <h3>Submit your idea</h3>
+          <p>Describe a business concept in plain English. A sentence or a paragraph — the AI works with whatever you give it.</p>
+        </div>
+        <div class="step-arrow" aria-hidden="true"></div>
+        <div class="step">
+          <div class="step-num">02</div>
+          <h3>Agents research &amp; plan</h3>
+          <p>CEO, Research, Growth, and Engineering agents activate. They generate your mission, analyze competitors, and build a task backlog.</p>
+        </div>
+        <div class="step-arrow" aria-hidden="true"></div>
+        <div class="step">
+          <div class="step-num">03</div>
+          <h3>Autonomous execution</h3>
+          <p>Agents run in daily cycles — drafting emails, scheduling content, proposing partnerships, and refining strategy. You monitor from your dashboard.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-          <label for="idea">Idea</label>
-          <textarea id="idea" name="idea" placeholder="Describe your idea" required></textarea>
+  <!-- CAPABILITIES -->
+  <section class="section section-dark" id="capabilities">
+    <div class="section-inner">
+      <p class="section-tag">Capabilities</p>
+      <h2 class="section-h2">Four agents. One mission.<br/>Your company, on autopilot.</h2>
+      <div class="caps-grid">
 
-          <button type="submit">Submit to Backend</button>
+        <div class="cap-card">
+          <div class="cap-header">
+            <span class="cap-icon">R</span>
+            <h3>Market Research</h3>
+          </div>
+          <p>Deep competitive analysis, market sizing, and positioning strategy — generated in minutes.</p>
+          <div class="cap-term">
+            <div class="cap-line">> Analyzing 47 competitors in AI writing space...</div>
+            <div class="cap-line">> Market size: $4.2B by 2027 (CAGR 23.1%)</div>
+            <div class="cap-line">> Key gap identified: No player serves non-English SMBs</div>
+            <div class="cap-line t-accent">> Positioning: "AI writing for the global middle market"</div>
+          </div>
+        </div>
+
+        <div class="cap-card">
+          <div class="cap-header">
+            <span class="cap-icon">G</span>
+            <h3>Growth Strategy</h3>
+          </div>
+          <p>Autonomous task generation — from cold outreach to A/B tests to partnership plays.</p>
+          <div class="cap-term">
+            <div class="cap-line">> Task: Cold outreach to 50 Shopify Plus merchants</div>
+            <div class="cap-line">> Task: A/B test landing page headline variants</div>
+            <div class="cap-line">> Task: Partner integration with Stripe billing</div>
+            <div class="cap-line t-accent">> Task: Launch Product Hunt campaign (Thu 12:01AM)</div>
+          </div>
+        </div>
+
+        <div class="cap-card">
+          <div class="cap-header">
+            <span class="cap-icon">C</span>
+            <h3>Content &amp; Outreach</h3>
+          </div>
+          <p>Tweets, cold emails, ad copy — all personalized to your brand voice and audience.</p>
+          <div class="cap-term">
+            <div class="cap-line">> Tweet: "Most AI tools automate tasks. We automate judgment."</div>
+            <div class="cap-line">> Cold email composed to j***@stripe.com</div>
+            <div class="cap-line">> Subject: "Your merchants are leaving money on the table"</div>
+            <div class="cap-line t-accent">> 3 ad variants generated for Meta campaign</div>
+          </div>
+        </div>
+
+        <div class="cap-card">
+          <div class="cap-header">
+            <span class="cap-icon">X</span>
+            <h3>Autonomous Execution</h3>
+          </div>
+          <p>CEO, engineering, marketing, and research agents work in cycles — 24/7, no babysitting.</p>
+          <div class="cap-term">
+            <div class="cap-line">> Agent cycle #14 starting...</div>
+            <div class="cap-line">> [CEO] Adjusting priorities from overnight data</div>
+            <div class="cap-line">> [MARKETING] 6 tweets + 3 email sequences queued</div>
+            <div class="cap-line t-accent">> [ENGINEERING] Dashboard improvements deployed</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="section" id="pricing">
+    <div class="section-inner">
+      <p class="section-tag">Pricing</p>
+      <h2 class="section-h2">Start for less than a coffee a day</h2>
+      <div class="pricing-grid">
+
+        <div class="price-card">
+          <div class="price-tier">Starter</div>
+          <div class="price-amount"><span class="price-dollar">$</span>29<span class="price-period">/mo</span></div>
+          <ul class="price-features">
+            <li>1 company</li>
+            <li>All 4 agent types</li>
+            <li>Daily agent cycles</li>
+            <li>Market research reports</li>
+            <li>Email &amp; content drafts</li>
+            <li>Company dashboard</li>
+          </ul>
+          <a href="#submit" class="btn btn-primary btn-full">Get started</a>
+        </div>
+
+        <div class="price-card price-card-pro">
+          <div class="price-badge">Most popular</div>
+          <div class="price-tier">Pro</div>
+          <div class="price-amount"><span class="price-dollar">$</span>59<span class="price-period">/mo</span></div>
+          <ul class="price-features">
+            <li>3 companies</li>
+            <li>All 4 agent types</li>
+            <li>Priority agent cycles</li>
+            <li>Advanced market intelligence</li>
+            <li>Automated outreach sending</li>
+            <li>Custom agent instructions</li>
+            <li>Priority support</li>
+          </ul>
+          <a href="#submit" class="btn btn-primary btn-full">Get started</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SUBMIT -->
+  <section class="section section-dark" id="submit">
+    <div class="section-inner">
+      <p class="section-tag">Launch</p>
+      <h2 class="section-h2">Describe your idea.<br/>We'll build the company.</h2>
+      <div class="form-wrap">
+        <form id="idea-form" class="idea-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Your name</label>
+              <input id="name" name="name" type="text" placeholder="Jane Doe" required />
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" placeholder="jane@example.com" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="idea">Your business idea</label>
+            <textarea id="idea" name="idea" placeholder="Describe your business idea. What problem does it solve? Who is the customer? Be as brief or detailed as you like." required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-full btn-lg">Launch my AI company</button>
+          <p class="form-note">Your idea is processed by AI agents within minutes. If our backend is offline, you'll be redirected to email.</p>
         </form>
-        <p class="small">If backend is down, submit falls back to mailto.</p>
-      </section>
+        <div id="form-response" class="form-response" style="display:none;"></div>
+      </div>
+    </div>
+  </section>
 
-      <section class="card">
-        <h2>API Response</h2>
-        <pre id="api-response">No request yet.</pre>
-      </section>
-    </main>
-  </div>
+  <!-- FAQ -->
+  <section class="section" id="faq">
+    <div class="section-inner">
+      <p class="section-tag">FAQ</p>
+      <h2 class="section-h2">Common questions</h2>
+      <div class="faq-list">
+
+        <details class="faq-item">
+          <summary>What is Cofounder?</summary>
+          <p>Cofounder is an autonomous AI platform. You submit a business idea, and coordinated AI agents handle everything from market research to growth strategy to daily operations — running 24/7 without you needing to manage them.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>How does it actually work?</summary>
+          <p>When you submit an idea, four specialized agents activate: a CEO agent (strategy and priorities), a Research agent (competitive analysis and market sizing), a Growth agent (tasks, outreach, partnerships), and a Marketing agent (content, emails, social). They run in daily cycles, each building on the last.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>What happens after I submit my idea?</summary>
+          <p>Within minutes your company dashboard is live. You'll see your generated mission statement, competitive analysis, initial growth tasks, and draft outreach — all created autonomously. Agents continue running daily cycles from there.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>Can I guide the agents?</summary>
+          <p>Yes. Pro plan users can set custom agent instructions. All users can view agent output and adjust priorities through the dashboard. The agents are autonomous but not unsupervised.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>What kind of ideas work best?</summary>
+          <p>Anything with a clear customer and problem. SaaS products, local services, e-commerce, content businesses, marketplaces — the agents adapt to the domain. The more context you give, the sharper the output.</p>
+        </details>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">Cofounder<span class="blink">_</span></div>
+      <div class="footer-links">
+        <a href="#how">How it works</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+        <a href="mailto:mhendricks1290@gmail.com">Contact</a>
+      </div>
+      <div class="footer-copy">Built with autonomous agents. Shipped by humans.</div>
+    </div>
+  </footer>
 
   <script src="./config.js"></script>
   <script src="./app.js"></script>

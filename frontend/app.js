@@ -1,74 +1,111 @@
 (function () {
-  const cfg = window.CONFIG || {};
-  const backendBase = (cfg.BACKEND_URL || "").replace(/\/$/, "");
-  const healthEl = document.getElementById("health-status");
-  const apiRespEl = document.getElementById("api-response");
-  const form = document.getElementById("idea-form");
+  var cfg = window.CONFIG || {};
+  var backendBase = (cfg.BACKEND_URL || "").replace(/\/$/, "");
 
-  function setHealth(msg, level) {
-    healthEl.textContent = msg;
-    healthEl.className = "status " + (level || "warn");
-  }
+  // ---- Scroll-triggered visibility ----
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
 
-  async function fetchWithTimeout(url, options, timeoutMs) {
-    const controller = new AbortController();
-    const id = setTimeout(() => controller.abort(), timeoutMs);
-    try {
-      return await fetch(url, { ...(options || {}), signal: controller.signal });
-    } finally {
-      clearTimeout(id);
-    }
-  }
-
-  async function checkHealth() {
-    if (!backendBase) {
-      setHealth("Backend URL not configured. Running in frontend-only fallback mode.", "warn");
-      return;
-    }
-    try {
-      const res = await fetchWithTimeout(backendBase + "/api/health", {}, 5000);
-      if (!res.ok) throw new Error("HTTP " + res.status);
-      const data = await res.json();
-      setHealth("Backend reachable: " + JSON.stringify(data), "ok");
-    } catch (err) {
-      setHealth("Backend unavailable: " + String(err), "warn");
-    }
-  }
-
-  form.addEventListener("submit", async function (e) {
-    e.preventDefault();
-    const name = document.getElementById("name").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const idea = document.getElementById("idea").value.trim();
-
-    if (!backendBase) {
-      const subject = encodeURIComponent("Cofounder Inquiry: " + (name || "New lead"));
-      const body = encodeURIComponent("Name: " + name + "\nEmail: " + email + "\n\nIdea:\n" + idea);
-      window.location.href = "mailto:mhendricks1290@gmail.com?subject=" + subject + "&body=" + body;
-      return;
-    }
-
-    apiRespEl.textContent = "Submitting to API...";
-    try {
-      const res = await fetchWithTimeout(backendBase + "/api/ideas", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name: name, email: email, idea: idea })
-      }, 7000);
-
-      const data = await res.json();
-      apiRespEl.textContent = JSON.stringify(data, null, 2);
-      if (res.ok) form.reset();
-    } catch (err) {
-      const subject = encodeURIComponent("Cofounder Inquiry: " + (name || "New lead"));
-      const body = encodeURIComponent("Name: " + name + "\nEmail: " + email + "\n\nIdea:\n" + idea);
-      const mailto = "mailto:mhendricks1290@gmail.com?subject=" + subject + "&body=" + body;
-      apiRespEl.innerHTML =
-        "API unavailable. " +
-        '<a href="' + mailto + '">Send via email instead</a>. ' +
-        "Error: " + String(err);
-    }
+  document.querySelectorAll(".step, .cap-card, .price-card, .faq-item").forEach(function (el, i) {
+    el.style.transitionDelay = (i % 4) * 0.08 + "s";
+    observer.observe(el);
   });
 
-  checkHealth();
+  // ---- Live stats from backend ----
+  function updateStats() {
+    if (!backendBase) return;
+    fetch(backendBase + "/api/stats", { signal: AbortSignal.timeout(5000) })
+      .then(function (res) { return res.ok ? res.json() : Promise.reject(); })
+      .then(function (data) {
+        var map = {
+          companies: data.total_companies || data.companies,
+          tasks: data.tasks_completed,
+          emails: data.emails_sent
+        };
+        Object.keys(map).forEach(function (key) {
+          if (!map[key]) return;
+          var el = document.querySelector('[data-stat="' + key + '"]');
+          if (el) el.textContent = Number(map[key]).toLocaleString() + "+";
+        });
+      })
+      .catch(function () {});
+  }
+  updateStats();
+
+  // ---- Form submission ----
+  var form = document.getElementById("idea-form");
+  var respEl = document.getElementById("form-response");
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var name = document.getElementById("name").value.trim();
+    var email = document.getElementById("email").value.trim();
+    var idea = document.getElementById("idea").value.trim();
+
+    if (!backendBase) {
+      sendMailto(name, email, idea);
+      return;
+    }
+
+    var btn = form.querySelector("button[type=submit]");
+    btn.textContent = "Launching...";
+    btn.disabled = true;
+
+    fetch(backendBase + "/api/ideas", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name: name, email: email, idea: idea }),
+      signal: AbortSignal.timeout(15000)
+    })
+      .then(function (res) { return res.json().then(function (d) { return { ok: res.ok, data: d }; }); })
+      .then(function (result) {
+        respEl.style.display = "block";
+        if (result.ok) {
+          respEl.className = "form-response success";
+          respEl.textContent = "Your company is being created. AI agents are activating now.\n\n" + JSON.stringify(result.data, null, 2);
+          form.reset();
+        } else {
+          respEl.className = "form-response error";
+          respEl.textContent = "Server responded with an error:\n" + JSON.stringify(result.data, null, 2);
+        }
+      })
+      .catch(function () {
+        respEl.style.display = "block";
+        respEl.className = "form-response error";
+        respEl.innerHTML =
+          "Backend unavailable. <a href=\"#\" id=\"mailto-fallback\" style=\"color:var(--accent);text-decoration:underline;\">Send via email instead</a>.";
+        document.getElementById("mailto-fallback").addEventListener("click", function (ev) {
+          ev.preventDefault();
+          sendMailto(name, email, idea);
+        });
+      })
+      .finally(function () {
+        btn.textContent = "Launch my AI company";
+        btn.disabled = false;
+      });
+  });
+
+  function sendMailto(name, email, idea) {
+    var subject = encodeURIComponent("Cofounder: " + (name || "New idea"));
+    var body = encodeURIComponent("Name: " + name + "\nEmail: " + email + "\n\nIdea:\n" + idea);
+    window.location.href = "mailto:mhendricks1290@gmail.com?subject=" + subject + "&body=" + body;
+  }
+
+  // ---- Smooth nav highlight ----
+  var navCta = document.querySelector(".nav-cta");
+  window.addEventListener("scroll", function () {
+    if (window.scrollY > 100) {
+      navCta.style.borderColor = "var(--accent)";
+      navCta.style.color = "var(--accent)";
+    } else {
+      navCta.style.borderColor = "";
+      navCta.style.color = "";
+    }
+  });
 })();
