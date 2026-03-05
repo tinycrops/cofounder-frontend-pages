@@ -138,7 +138,7 @@
       return;
     }
 
-    // Real backend submission
+    // Real backend submission — streams SSE from onboarding agent
     log("> Connecting to backend...");
     try {
       var res = await fetch(backendBase + "/api/ideas", {
@@ -146,31 +146,47 @@
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name: userName, email: userEmail, idea: idea })
       });
-      var data = await res.json();
 
-      if (data.slug) {
-        log("> Company created: " + (data.name || data.slug));
-        log("> Running first agent cycle...");
-        log("");
-        log("Dashboard: " + window.location.origin + "/dashboard/" + data.slug);
-      } else {
-        log("> Submitted. " + JSON.stringify(data));
+      if (!res.ok) {
+        var errData = await res.json().catch(function () { return {}; });
+        log("> Error: " + (errData.detail || res.statusText));
+        return;
+      }
+
+      var reader = res.body.getReader();
+      var decoder = new TextDecoder();
+      var buffer = "";
+
+      while (true) {
+        var result = await reader.read();
+        if (result.done) break;
+        buffer += decoder.decode(result.value, { stream: true });
+
+        var lines = buffer.split("\n");
+        buffer = lines.pop();
+
+        for (var j = 0; j < lines.length; j++) {
+          var line = lines[j];
+          if (!line.startsWith("data: ")) continue;
+          try {
+            var evt = JSON.parse(line.slice(6));
+            if (evt.type === "done" && evt.slug) {
+              log("");
+              log("> Company created successfully.");
+              log("> Dashboard: " + window.location.origin + "/dashboard/" + evt.slug);
+            } else if (evt.type === "error") {
+              log("> Error: " + evt.text);
+            } else if (evt.type === "queued") {
+              log("> Idea #" + evt.id + " queued. We'll email " + userEmail + " when ready.");
+            } else if (evt.text) {
+              log("> " + evt.text);
+            }
+          } catch (parseErr) { /* skip malformed lines */ }
+        }
       }
     } catch (err) {
       log("> Backend unavailable — queued for processing.");
       log("> We'll email " + userEmail + " when ready.");
-
-      // Fallback: send via mailto
-      var subject = encodeURIComponent("Cofounder Idea from " + userEmail);
-      var body = encodeURIComponent("Email: " + userEmail + "\n\nIdea:\n" + idea);
-      log("");
-      log("> Or send directly: mailto:mhendricks1290@gmail.com");
-      var link = document.createElement("a");
-      link.href = "mailto:mhendricks1290@gmail.com?subject=" + subject + "&body=" + body;
-      link.textContent = "> Click here to email your idea";
-      link.style.color = "#6d5cff";
-      terminal.appendChild(document.createTextNode("\n"));
-      terminal.appendChild(link);
     }
   });
 
