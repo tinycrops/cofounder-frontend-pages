@@ -60,7 +60,13 @@
       apiRespEl.textContent = JSON.stringify(data, null, 2);
       if (res.ok) form.reset();
     } catch (err) {
-      apiRespEl.textContent = "API unavailable. Error: " + String(err);
+      const subject = encodeURIComponent("Cofounder Inquiry: " + (name || "New lead"));
+      const body = encodeURIComponent("Name: " + name + "\nEmail: " + email + "\n\nIdea:\n" + idea);
+      const mailto = "mailto:mhendricks1290@gmail.com?subject=" + subject + "&body=" + body;
+      apiRespEl.innerHTML =
+        "API unavailable. " +
+        '<a href="' + mailto + '">Send via email instead</a>. ' +
+        "Error: " + String(err);
     }
   });
 
