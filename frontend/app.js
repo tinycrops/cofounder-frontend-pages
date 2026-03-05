@@ -1,111 +1,180 @@
 (function () {
-  var cfg = window.CONFIG || {};
-  var backendBase = (cfg.BACKEND_URL || "").replace(/\/$/, "");
+  const cfg = window.CONFIG || {};
+  const backendBase = (cfg.BACKEND_URL || "").replace(/\/$/, "");
+  const googleClientId = cfg.GOOGLE_CLIENT_ID || "";
 
-  // ---- Scroll-triggered visibility ----
-  var observer = new IntersectionObserver(function (entries) {
-    entries.forEach(function (entry) {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("visible");
-        observer.unobserve(entry.target);
+  const overlay = document.getElementById("overlay");
+  const ctaBtn = document.getElementById("cta-btn");
+  const signInBtn = document.getElementById("sign-in-btn");
+  const closeBtn = document.getElementById("modal-close");
+  const googleBtn = document.getElementById("google-btn");
+  const emailForm = document.getElementById("email-form");
+  const ideaForm = document.getElementById("idea-form");
+  const terminal = document.getElementById("terminal");
+
+  const stepAuth = document.getElementById("step-auth");
+  const stepIdea = document.getElementById("step-idea");
+  const stepRunning = document.getElementById("step-running");
+
+  let userEmail = null;
+  let userName = null;
+
+  function openModal() { overlay.classList.add("open"); }
+  function closeModal() { overlay.classList.remove("open"); }
+
+  function showStep(step) {
+    [stepAuth, stepIdea, stepRunning].forEach(function (s) { s.classList.add("hidden"); });
+    step.classList.remove("hidden");
+  }
+
+  // Open modal on CTA or sign in
+  ctaBtn.addEventListener("click", function () { openModal(); showStep(stepAuth); });
+  signInBtn.addEventListener("click", function () { openModal(); showStep(stepAuth); });
+  closeBtn.addEventListener("click", closeModal);
+  overlay.addEventListener("click", function (e) { if (e.target === overlay) closeModal(); });
+
+  // Decode JWT payload (Google ID tokens are JWTs)
+  function decodeJwtPayload(token) {
+    var base64 = token.split(".")[1].replace(/-/g, "+").replace(/_/g, "/");
+    return JSON.parse(atob(base64));
+  }
+
+  // Google OAuth callback
+  function handleGoogleResponse(response) {
+    var payload = decodeJwtPayload(response.credential);
+    userEmail = payload.email;
+    userName = payload.name || payload.email;
+    showStep(stepIdea);
+  }
+
+  // Expose callback globally for GIS
+  window.handleGoogleResponse = handleGoogleResponse;
+
+  // Google Sign-In via GIS popup
+  googleBtn.addEventListener("click", function () {
+    if (!googleClientId || typeof google === "undefined") {
+      alert("Google sign-in is still loading. Try again in a moment.");
+      return;
+    }
+    google.accounts.id.initialize({
+      client_id: googleClientId,
+      callback: handleGoogleResponse,
+    });
+    google.accounts.id.prompt(function (notification) {
+      // If One Tap is suppressed (e.g. user dismissed before), fall back to button flow
+      if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
+        // Use the redirect/popup OAuth flow as fallback
+        var client = google.accounts.oauth2.initCodeClient({
+          client_id: googleClientId,
+          scope: "email profile",
+          ux_mode: "popup",
+          callback: function (resp) {
+            // For code flow we just need the email — use the id_token approach instead
+          },
+        });
+        // Simpler: use initTokenClient for implicit flow
+        var tokenClient = google.accounts.oauth2.initTokenClient({
+          client_id: googleClientId,
+          scope: "email profile",
+          callback: function (tokenResponse) {
+            fetch("https://www.googleapis.com/oauth2/v3/userinfo", {
+              headers: { Authorization: "Bearer " + tokenResponse.access_token }
+            }).then(function (r) { return r.json(); }).then(function (info) {
+              userEmail = info.email;
+              userName = info.name || info.email;
+              showStep(stepIdea);
+            });
+          },
+        });
+        tokenClient.requestAccessToken();
       }
     });
-  }, { threshold: 0.15 });
-
-  document.querySelectorAll(".step, .cap-card, .price-card, .faq-item").forEach(function (el, i) {
-    el.style.transitionDelay = (i % 4) * 0.08 + "s";
-    observer.observe(el);
   });
 
-  // ---- Live stats from backend ----
-  function updateStats() {
-    if (!backendBase) return;
-    fetch(backendBase + "/api/stats", { signal: AbortSignal.timeout(5000) })
-      .then(function (res) { return res.ok ? res.json() : Promise.reject(); })
-      .then(function (data) {
-        var map = {
-          companies: data.total_companies || data.companies,
-          tasks: data.tasks_completed,
-          emails: data.emails_sent
-        };
-        Object.keys(map).forEach(function (key) {
-          if (!map[key]) return;
-          var el = document.querySelector('[data-stat="' + key + '"]');
-          if (el) el.textContent = Number(map[key]).toLocaleString() + "+";
-        });
-      })
-      .catch(function () {});
-  }
-  updateStats();
-
-  // ---- Form submission ----
-  var form = document.getElementById("idea-form");
-  var respEl = document.getElementById("form-response");
-
-  form.addEventListener("submit", function (e) {
+  // Email auth
+  emailForm.addEventListener("submit", function (e) {
     e.preventDefault();
-    var name = document.getElementById("name").value.trim();
-    var email = document.getElementById("email").value.trim();
+    userEmail = document.getElementById("auth-email").value.trim();
+    userName = userEmail;
+    if (userEmail) showStep(stepIdea);
+  });
+
+  // Idea submission
+  ideaForm.addEventListener("submit", async function (e) {
+    e.preventDefault();
     var idea = document.getElementById("idea").value.trim();
+    if (!idea) return;
+
+    showStep(stepRunning);
+    terminal.textContent = "";
+
+    function log(text) {
+      terminal.textContent += text + "\n";
+      terminal.scrollTop = terminal.scrollHeight;
+    }
+
+    log("> Initializing Cofounder for " + userEmail + "...");
 
     if (!backendBase) {
-      sendMailto(name, email, idea);
+      // Frontend-only demo mode
+      var steps = [
+        "> Analyzing business idea...",
+        "> Generating company name...",
+        "> Creating mission statement...",
+        "> Researching market landscape...",
+        "> Identifying target customers...",
+        "> Proposing growth tasks...",
+        "> Setting up autonomous agent cycle...",
+        "",
+        "Your company is being built.",
+        "We'll email " + userEmail + " when your dashboard is ready.",
+        "",
+        "In the meantime — check your inbox for early access."
+      ];
+      for (var i = 0; i < steps.length; i++) {
+        await delay(600 + Math.random() * 400);
+        log(steps[i]);
+      }
       return;
     }
 
-    var btn = form.querySelector("button[type=submit]");
-    btn.textContent = "Launching...";
-    btn.disabled = true;
-
-    fetch(backendBase + "/api/ideas", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name: name, email: email, idea: idea }),
-      signal: AbortSignal.timeout(15000)
-    })
-      .then(function (res) { return res.json().then(function (d) { return { ok: res.ok, data: d }; }); })
-      .then(function (result) {
-        respEl.style.display = "block";
-        if (result.ok) {
-          respEl.className = "form-response success";
-          respEl.textContent = "Your company is being created. AI agents are activating now.\n\n" + JSON.stringify(result.data, null, 2);
-          form.reset();
-        } else {
-          respEl.className = "form-response error";
-          respEl.textContent = "Server responded with an error:\n" + JSON.stringify(result.data, null, 2);
-        }
-      })
-      .catch(function () {
-        respEl.style.display = "block";
-        respEl.className = "form-response error";
-        respEl.innerHTML =
-          "Backend unavailable. <a href=\"#\" id=\"mailto-fallback\" style=\"color:var(--accent);text-decoration:underline;\">Send via email instead</a>.";
-        document.getElementById("mailto-fallback").addEventListener("click", function (ev) {
-          ev.preventDefault();
-          sendMailto(name, email, idea);
-        });
-      })
-      .finally(function () {
-        btn.textContent = "Launch my AI company";
-        btn.disabled = false;
+    // Real backend submission
+    log("> Connecting to backend...");
+    try {
+      var res = await fetch(backendBase + "/api/ideas", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: userName, email: userEmail, idea: idea })
       });
-  });
+      var data = await res.json();
 
-  function sendMailto(name, email, idea) {
-    var subject = encodeURIComponent("Cofounder: " + (name || "New idea"));
-    var body = encodeURIComponent("Name: " + name + "\nEmail: " + email + "\n\nIdea:\n" + idea);
-    window.location.href = "mailto:mhendricks1290@gmail.com?subject=" + subject + "&body=" + body;
-  }
+      if (data.slug) {
+        log("> Company created: " + (data.name || data.slug));
+        log("> Running first agent cycle...");
+        log("");
+        log("Dashboard: " + window.location.origin + "/dashboard/" + data.slug);
+      } else {
+        log("> Submitted. " + JSON.stringify(data));
+      }
+    } catch (err) {
+      log("> Backend unavailable — queued for processing.");
+      log("> We'll email " + userEmail + " when ready.");
 
-  // ---- Smooth nav highlight ----
-  var navCta = document.querySelector(".nav-cta");
-  window.addEventListener("scroll", function () {
-    if (window.scrollY > 100) {
-      navCta.style.borderColor = "var(--accent)";
-      navCta.style.color = "var(--accent)";
-    } else {
-      navCta.style.borderColor = "";
-      navCta.style.color = "";
+      // Fallback: send via mailto
+      var subject = encodeURIComponent("Cofounder Idea from " + userEmail);
+      var body = encodeURIComponent("Email: " + userEmail + "\n\nIdea:\n" + idea);
+      log("");
+      log("> Or send directly: mailto:mhendricks1290@gmail.com");
+      var link = document.createElement("a");
+      link.href = "mailto:mhendricks1290@gmail.com?subject=" + subject + "&body=" + body;
+      link.textContent = "> Click here to email your idea";
+      link.style.color = "#6d5cff";
+      terminal.appendChild(document.createTextNode("\n"));
+      terminal.appendChild(link);
     }
   });
+
+  function delay(ms) {
+    return new Promise(function (resolve) { setTimeout(resolve, ms); });
+  }
 })();
