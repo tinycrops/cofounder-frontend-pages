@@ -73,3 +73,92 @@ pre {
   overflow: auto;
   font-size: 12px;
 }
+
+/* ---- mascot ---- */
+.mascot-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 18px;
+}
+.header-text { flex: 1; }
+
+.robot {
+  position: relative;
+  flex-shrink: 0;
+  animation: bob 3s ease-in-out infinite;
+  user-select: none;
+}
+.bot-art {
+  font-size: 16px;
+  line-height: 1.25;
+  max-height: none;
+  overflow: visible;
+  color: var(--ink);
+}
+.antenna { color: var(--muted); }
+.head { color: var(--ink); }
+.eye {
+  display: inline-block;
+  animation: blink 4s step-end infinite;
+}
+.r-eye { animation-delay: 0.15s; }
+.body { color: var(--muted); }
+.legs { color: var(--accent); }
+
+/* thought bubble */
+.thought {
+  position: absolute;
+  top: -22px;
+  left: 50px;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  opacity: 0;
+  animation: fadeThought 8s ease-in-out infinite;
+}
+.dot {
+  font-size: 11px;
+  color: var(--muted);
+}
+.d1 { animation: popDot 8s ease-in-out infinite; }
+.d2 { animation: popDot 8s ease-in-out 0.3s infinite; }
+.d3 { animation: popDot 8s ease-in-out 0.6s infinite; }
+.bubble {
+  font-size: 11px;
+  color: var(--muted);
+  background: var(--panel);
+  border: 1px solid var(--line);
+  padding: 2px 7px;
+  border-radius: 6px;
+  animation: popBubble 8s ease-in-out infinite;
+}
+
+@keyframes bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+@keyframes blink {
+  0%, 90%, 100% { opacity: 1; }
+  92%, 98% { opacity: 0; }
+}
+@keyframes fadeThought {
+  0%, 15% { opacity: 0; }
+  25%, 70% { opacity: 1; }
+  85%, 100% { opacity: 0; }
+}
+@keyframes popDot {
+  0%, 18% { opacity: 0; transform: scale(0); }
+  22% { opacity: 1; transform: scale(1); }
+  75%, 100% { opacity: 0; }
+}
+@keyframes popBubble {
+  0%, 22% { opacity: 0; transform: scale(0.7); }
+  28% { opacity: 1; transform: scale(1); }
+  70% { opacity: 1; transform: scale(1); }
+  80%, 100% { opacity: 0; transform: scale(0.9); }
+}
+
+@media (max-width: 860px) {
+  .mascot-row { flex-direction: column; align-items: flex-start; }
+}
