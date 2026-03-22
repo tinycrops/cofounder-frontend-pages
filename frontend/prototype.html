@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>TinyCrops Prototype — Artifact-Native DSS Console</title>
+  <meta
+    name="description"
+    content="A basic browser prototype of an artifact-native DSS system: tiny model, visible policy graph, and auditable output."
+  />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body class="prototype-body">
+  <div class="page-noise" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="brand-lockup">
+      <div class="brand-kicker">TinyCrops Prototype</div>
+      <div class="brand-name">Artifact-Native DSS Console</div>
+    </div>
+    <nav class="site-nav">
+      <a href="./index.html">Research Note</a>
+      <a href="#console">Console</a>
+      <a href="#explanation">How it Works</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero prototype-hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Basic system prototype</p>
+        <h1>
+          A tiny model, a visible policy graph,
+          and a constrained output shell.
+        </h1>
+        <p class="lede">
+          This prototype uses a narrow software-release triage domain to show
+          the idea in miniature. It does not freeform-answer. It classifies,
+          routes, constrains, and explains.
+        </p>
+        <div class="hero-actions">
+          <a class="button primary" href="#console">Run the Console</a>
+          <a class="button secondary" href="./index.html">Back to Research Note</a>
+        </div>
+      </div>
+
+      <aside class="hero-panel">
+        <div class="panel-label">Prototype properties</div>
+        <div class="artifact-stack">
+          <article class="artifact-card card-fontemon">
+            <div class="artifact-name">Shell</div>
+            <p>Constrained interface with fixed state transitions.</p>
+          </article>
+          <article class="artifact-card card-llama">
+            <div class="artifact-name">Runtime</div>
+            <p>Local browser execution with no backend dependency.</p>
+          </article>
+          <article class="artifact-card card-golf">
+            <div class="artifact-name">Tiny model</div>
+            <p>Small heuristic scorer standing in for compressed inference.</p>
+          </article>
+        </div>
+      </aside>
+    </section>
+
+    <section id="console" class="section">
+      <div class="section-heading">
+        <p class="eyebrow">Interactive demo</p>
+        <h2>Glass-box release triage artifact</h2>
+      </div>
+
+      <div class="prototype-grid">
+        <article class="prototype-card prototype-input-card">
+          <h3>1. Input request</h3>
+          <p class="caption">
+            Enter a change request or select a sample. The tiny domain model
+            will score it, then a policy graph will constrain what happens next.
+          </p>
+          <div class="sample-row">
+            <button class="sample-chip" data-sample="We are changing checkout payment routing and refund handling before Friday.">
+              Billing sample
+            </button>
+            <button class="sample-chip" data-sample="We are rotating session tokens and changing login behavior for admins.">
+              Auth sample
+            </button>
+            <button class="sample-chip" data-sample="We want to export customer records containing personal email fields to a vendor.">
+              Data sample
+            </button>
+            <button class="sample-chip" data-sample="We are updating landing-page copy and onboarding tutorials, no backend changes.">
+              Content sample
+            </button>
+          </div>
+          <label class="prototype-label" for="case-input">Request description</label>
+          <textarea id="case-input" class="prototype-input" rows="7">We are changing checkout payment routing and refund handling before Friday.</textarea>
+          <div class="hero-actions compact-actions">
+            <button class="button primary prototype-run" id="run-prototype" type="button">Analyze Artifact Path</button>
+            <button class="button secondary prototype-run" id="clear-prototype" type="button">Clear</button>
+          </div>
+        </article>
+
+        <article class="prototype-card">
+          <h3>2. Tiny model scores</h3>
+          <div id="score-bars" class="score-bars"></div>
+        </article>
+
+        <article class="prototype-card">
+          <h3>3. Policy graph</h3>
+          <div id="graph-steps" class="graph-steps"></div>
+        </article>
+
+        <article class="prototype-card prototype-output-card">
+          <h3>4. Constrained artifact output</h3>
+          <div id="artifact-output" class="artifact-output"></div>
+        </article>
+
+        <article class="prototype-card">
+          <h3>5. Audit trail</h3>
+          <div id="audit-list" class="audit-list"></div>
+        </article>
+
+        <article class="prototype-card">
+          <h3>6. Artifact manifest</h3>
+          <div id="manifest-output" class="manifest-output"></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="explanation" class="section">
+      <div class="section-heading">
+        <p class="eyebrow">What this demonstrates</p>
+        <h2>A prototype of the system, not just a page about the system.</h2>
+      </div>
+      <div class="thesis-grid">
+        <article class="glass-card">
+          <h3>Tiny domain model</h3>
+          <p>
+            Here it is a transparent keyword scorer, but the interface is built
+            so a compact trained model could replace it later without changing
+            the shell.
+          </p>
+        </article>
+        <article class="glass-card">
+          <h3>Visible policy graph</h3>
+          <p>
+            The graph is not hidden. You can see exactly which route was taken,
+            why escalation occurred, and which actions are allowed.
+          </p>
+        </article>
+        <article class="glass-card">
+          <h3>Compiled shell behavior</h3>
+          <p>
+            The output is deliberately constrained into a narrow artifact:
+            route, risk tier, approved actions, blocked actions, and an audit
+            trail.
+          </p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div>Prototype running fully client-side on GitHub Pages.</div>
+    <div class="footer-links">
+      <a href="./index.html">Research Note</a>
+      <a href="#console">Run Again</a>
+    </div>
+  </footer>
+
+  <script src="./config.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>

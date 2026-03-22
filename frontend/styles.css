@@ -102,14 +102,16 @@ body {
 
 .site-nav a,
 .footer-links a,
-.sources-list a {
+.sources-list a,
+.inline-link {
   color: var(--ink);
   text-decoration: none;
 }
 
 .site-nav a:hover,
 .footer-links a:hover,
-.sources-list a:hover {
+.sources-list a:hover,
+.inline-link:hover {
   text-decoration: underline;
 }
 
@@ -403,6 +405,187 @@ body {
   margin: 0;
 }
 
+.prototype-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 16px;
+}
+
+.prototype-card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  padding: 22px;
+  box-shadow: var(--shadow);
+}
+
+.prototype-input-card,
+.prototype-output-card {
+  grid-column: span 2;
+}
+
+.sample-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 14px 0 18px;
+}
+
+.sample-chip {
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.62);
+  border-radius: 999px;
+  padding: 10px 14px;
+  cursor: pointer;
+  font: inherit;
+}
+
+.sample-chip:hover,
+.sample-chip:focus-visible {
+  border-color: rgba(39, 94, 254, 0.4);
+  outline: none;
+}
+
+.prototype-label {
+  display: block;
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+
+.prototype-input {
+  width: 100%;
+  border-radius: 18px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.62);
+  padding: 16px;
+  resize: vertical;
+  min-height: 150px;
+  font: inherit;
+  color: var(--ink);
+}
+
+.compact-actions {
+  margin-top: 16px;
+}
+
+.score-bars,
+.graph-steps,
+.audit-list,
+.artifact-output,
+.manifest-output {
+  display: grid;
+  gap: 12px;
+}
+
+.score-row {
+  display: grid;
+  gap: 8px;
+}
+
+.score-label {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 14px;
+}
+
+.graph-step {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 12px;
+  align-items: start;
+  padding: 12px 14px;
+  border-radius: 18px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.42);
+}
+
+.graph-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  margin-top: 4px;
+  background: rgba(25, 22, 21, 0.2);
+}
+
+.graph-step.active .graph-dot {
+  background: var(--blue);
+  box-shadow: 0 0 0 8px rgba(39, 94, 254, 0.12);
+}
+
+.graph-step.active {
+  border-color: rgba(39, 94, 254, 0.35);
+}
+
+.audit-item,
+.manifest-item {
+  padding: 12px 14px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid var(--line);
+}
+
+.artifact-banner {
+  padding: 16px 18px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, rgba(39, 94, 254, 0.12), rgba(17, 153, 139, 0.12));
+  border: 1px solid rgba(39, 94, 254, 0.18);
+}
+
+.artifact-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.artifact-cell {
+  padding: 14px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid var(--line);
+}
+
+.artifact-cell strong {
+  display: block;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+.tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 7px 10px;
+  font-size: 13px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.tag.good {
+  background: rgba(140, 191, 38, 0.14);
+  border-color: rgba(140, 191, 38, 0.28);
+}
+
+.tag.warn {
+  background: rgba(240, 168, 58, 0.18);
+  border-color: rgba(240, 168, 58, 0.28);
+}
+
+.tag.stop {
+  background: rgba(234, 97, 57, 0.16);
+  border-color: rgba(234, 97, 57, 0.3);
+}
+
 .sources-list {
   display: grid;
   gap: 10px;
@@ -443,7 +626,8 @@ body {
   .visual-columns,
   .architecture-grid,
   .prediction-grid,
-  .thesis-grid {
+  .thesis-grid,
+  .prototype-grid {
     grid-template-columns: 1fr;
   }
 
@@ -459,6 +643,15 @@ body {
   .site-header {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .prototype-input-card,
+  .prototype-output-card {
+    grid-column: span 1;
+  }
+
+  .artifact-grid {
+    grid-template-columns: 1fr;
   }
 }
 
