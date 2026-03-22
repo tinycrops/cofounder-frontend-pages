@@ -3,77 +3,343 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Cofounder — AI That Runs Your Company</title>
+  <title>TinyCrops Research — Domain-Specific Superintelligence Artifacts</title>
+  <meta
+    name="description"
+    content="An exploratory hypothesis: Fontemon, llama.ttf, and parameter-golf point toward auditable, tiny, domain-specific AI artifacts."
+  />
+  <meta property="og:title" content="TinyCrops Research — DSS Artifacts" />
+  <meta
+    property="og:description"
+    content="A scientific hypothesis website exploring Fontemon, llama.ttf, and parameter-golf as a new artifact architecture for verifiable AI."
+  />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://tinycrops.github.io/cofounder-frontend-pages/" />
   <link rel="stylesheet" href="./styles.css" />
-  <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 <body>
-  <!-- Top banner -->
-  <div class="banner" id="banner">
-    <span class="banner-pulse"></span>
-    Deploying marketing campaigns...
-    <a href="#" class="banner-link">Watch Cofounder work on <span id="company-count">4</span> companies live &rarr;</a>
-  </div>
+  <div class="page-noise" aria-hidden="true"></div>
 
-  <!-- Nav -->
-  <nav class="nav">
-    <div class="nav-inner">
-      <div class="logo">Cofounder</div>
-      <button class="sign-in-btn" id="sign-in-btn">Sign in</button>
+  <header class="site-header">
+    <div class="brand-lockup">
+      <div class="brand-kicker">TinyCrops Research Note</div>
+      <div class="brand-name">DSS Artifact Hypothesis</div>
     </div>
-  </nav>
+    <nav class="site-nav">
+      <a href="#thesis">Thesis</a>
+      <a href="#evidence">Evidence</a>
+      <a href="#architecture">Architecture</a>
+      <a href="#predictions">Predictions</a>
+    </nav>
+  </header>
 
-  <!-- Hero — the entire page -->
-  <main class="hero">
-    <h1 class="headline">AI That Runs Your Company<br/>While You Sleep.</h1>
-    <p class="sub">Cofounder thinks, builds, and markets your projects autonomously. It plans, codes, and promotes your ideas continuously — operating 24/7, adapting to data, and improving itself without human intervention.</p>
-    <button class="cta" id="cta-btn">Get Started</button>
-    <p class="fine">No credit card required &middot; Free to start</p>
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Exploratory hypothesis website</p>
+        <h1>
+          The next practical AI form factor may be the
+          <span>artifact</span>, not the app.
+        </h1>
+        <p class="lede">
+          We propose that three seemingly strange projects point to the same
+          scientific direction: useful intelligence can be made smaller,
+          more local, more inspectable, and more domain-bounded than the
+          current cloud-first generalist paradigm suggests.
+        </p>
+        <div class="hero-actions">
+          <a class="button primary" href="#thesis">Read the Hypothesis</a>
+          <a class="button secondary" href="#sources">Source Trail</a>
+        </div>
+      </div>
+
+      <aside class="hero-panel">
+        <div class="panel-label">Artifact spectrum</div>
+        <div class="artifact-stack">
+          <article class="artifact-card card-fontemon">
+            <div class="artifact-name">Fontemon</div>
+            <p>Compiled finite-state UI in standard font tables.</p>
+          </article>
+          <article class="artifact-card card-llama">
+            <div class="artifact-name">llama.ttf</div>
+            <p>Executable model runtime embedded in a font via Wasm.</p>
+          </article>
+          <article class="artifact-card card-golf">
+            <div class="artifact-name">parameter-golf</div>
+            <p>Formal pressure to maximize useful intelligence per byte.</p>
+          </article>
+        </div>
+      </aside>
+    </section>
+
+    <section class="metrics-band" aria-label="Research metrics">
+      <div class="metric">
+        <div class="metric-value">3</div>
+        <div class="metric-label">independent signals</div>
+      </div>
+      <div class="metric">
+        <div class="metric-value">&lt; 16 MB</div>
+        <div class="metric-label">artifact pressure in parameter-golf</div>
+      </div>
+      <div class="metric">
+        <div class="metric-value">local</div>
+        <div class="metric-label">execution direction</div>
+      </div>
+      <div class="metric">
+        <div class="metric-value">auditable</div>
+        <div class="metric-label">preferred system property</div>
+      </div>
+    </section>
+
+    <section id="thesis" class="section">
+      <div class="section-heading">
+        <p class="eyebrow">Central hypothesis</p>
+        <h2>Domain-specific superintelligence may arrive as compact, inspectable artifacts.</h2>
+      </div>
+      <div class="thesis-grid">
+        <article class="glass-card">
+          <h3>Hypothesis H1</h3>
+          <p>
+            High-value AI systems in constrained domains will increasingly be
+            delivered as portable artifacts that combine a bounded interface,
+            local model execution, and explicit policy or knowledge constraints.
+          </p>
+        </article>
+        <article class="glass-card">
+          <h3>Hypothesis H2</h3>
+          <p>
+            The winning architecture will separate three layers: a tiny model,
+            a verifiable orchestration graph, and a user-facing shell compiled
+            to a distribution format with unusually broad portability.
+          </p>
+        </article>
+        <article class="glass-card">
+          <h3>Hypothesis H3</h3>
+          <p>
+            In regulated or narrow operational contexts, artifact quality will
+            be measured less by general conversational breadth and more by
+            traceability, reproducibility, and efficiency per byte.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section id="evidence" class="section">
+      <div class="section-heading">
+        <p class="eyebrow">Evidence triad</p>
+        <h2>Three projects illuminate three distinct layers of the same future stack.</h2>
+      </div>
+
+      <div class="comparison-table">
+        <div class="row row-head">
+          <div>Project</div>
+          <div>What it proves</div>
+          <div>Limitation</div>
+          <div>Strategic value</div>
+        </div>
+        <div class="row">
+          <div class="project-name fontemon">Fontemon</div>
+          <div>Complex interfaces can be compiled into deterministic artifacts.</div>
+          <div>Static finite-state interaction only.</div>
+          <div>Auditable user shell.</div>
+        </div>
+        <div class="row">
+          <div class="project-name llama">llama.ttf</div>
+          <div>Executable local inference can ride inside unusual media formats.</div>
+          <div>Runtime portability depends on specialized shaper support.</div>
+          <div>Proof of embedded local intelligence.</div>
+        </div>
+        <div class="row">
+          <div class="project-name golf">parameter-golf</div>
+          <div>Useful language modeling can be forced into severe size budgets.</div>
+          <div>Benchmark setting, not a delivery shell.</div>
+          <div>Optimization discipline for tiny models.</div>
+        </div>
+      </div>
+
+      <div class="visual-columns">
+        <article class="diagram-card">
+          <h3>Interpretation</h3>
+          <svg viewBox="0 0 720 280" class="svg-diagram" role="img" aria-label="Three-layer system diagram">
+            <defs>
+              <linearGradient id="gradA" x1="0%" x2="100%">
+                <stop offset="0%" stop-color="#f3b34c"></stop>
+                <stop offset="100%" stop-color="#ff7a59"></stop>
+              </linearGradient>
+              <linearGradient id="gradB" x1="0%" x2="100%">
+                <stop offset="0%" stop-color="#59d1c2"></stop>
+                <stop offset="100%" stop-color="#2471ff"></stop>
+              </linearGradient>
+              <linearGradient id="gradC" x1="0%" x2="100%">
+                <stop offset="0%" stop-color="#d3ef57"></stop>
+                <stop offset="100%" stop-color="#66c61c"></stop>
+              </linearGradient>
+            </defs>
+            <rect x="30" y="32" rx="22" ry="22" width="200" height="88" fill="url(#gradA)"></rect>
+            <rect x="260" y="96" rx="22" ry="22" width="200" height="88" fill="url(#gradB)"></rect>
+            <rect x="490" y="160" rx="22" ry="22" width="200" height="88" fill="url(#gradC)"></rect>
+            <path d="M220 74 C248 74, 240 132, 260 140" stroke="#ffdca6" stroke-width="4" fill="none" stroke-dasharray="8 8"></path>
+            <path d="M450 140 C474 140, 470 194, 490 204" stroke="#c7f7f2" stroke-width="4" fill="none" stroke-dasharray="8 8"></path>
+            <text x="50" y="72">Constraint shell</text>
+            <text x="50" y="97">Fontemon style</text>
+            <text x="280" y="136">Embedded runtime</text>
+            <text x="280" y="161">llama.ttf style</text>
+            <text x="510" y="200">Tiny model discipline</text>
+            <text x="510" y="225">parameter-golf style</text>
+          </svg>
+          <p class="caption">
+            The projects do not compete directly. Together they hint at a stack:
+            shell, runtime, and compressed intelligence.
+          </p>
+        </article>
+
+        <article class="diagram-card">
+          <h3>Why now?</h3>
+          <div class="signal-bars">
+            <div class="signal">
+              <span>Portability pressure</span>
+              <div class="bar"><i style="width: 81%"></i></div>
+            </div>
+            <div class="signal">
+              <span>Auditability demand</span>
+              <div class="bar"><i style="width: 92%"></i></div>
+            </div>
+            <div class="signal">
+              <span>Local inference feasibility</span>
+              <div class="bar"><i style="width: 74%"></i></div>
+            </div>
+            <div class="signal">
+              <span>Artifact compression pressure</span>
+              <div class="bar"><i style="width: 95%"></i></div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="architecture" class="section">
+      <div class="section-heading">
+        <p class="eyebrow">Proposed architecture</p>
+        <h2>The artifact-native DSS stack</h2>
+      </div>
+
+      <div class="architecture-grid">
+        <article class="stack-layer">
+          <div class="layer-number">01</div>
+          <h3>Policy graph</h3>
+          <p>
+            A knowledge graph, protocol graph, or task graph constrains what
+            the system is allowed to infer, reveal, or recommend.
+          </p>
+        </article>
+        <article class="stack-layer">
+          <div class="layer-number">02</div>
+          <h3>Tiny domain model</h3>
+          <p>
+            A compact model trained under parameter-golf-like pressure performs
+            narrow-domain ranking, summarization, and next-step generation.
+          </p>
+        </article>
+        <article class="stack-layer">
+          <div class="layer-number">03</div>
+          <h3>Compiled interaction shell</h3>
+          <p>
+            A Fontemon-like or other artifact shell exposes only auditable
+            state transitions and human-readable outputs.
+          </p>
+        </article>
+        <article class="stack-layer">
+          <div class="layer-number">04</div>
+          <h3>Portable distribution</h3>
+          <p>
+            The result ships as a tiny, movable object: a font, package, local
+            app bundle, document-like executable medium, or edge-native file.
+          </p>
+        </article>
+      </div>
+
+      <article class="glass-card big-callout">
+        <h3>Scientific claim</h3>
+        <p>
+          The economically dominant AI systems of the next phase may not look
+          like monolithic chat endpoints. They may look like compact
+          task-specific artifacts with strict interfaces, embedded intelligence,
+          and verifiable behavior envelopes.
+        </p>
+      </article>
+    </section>
+
+    <section id="predictions" class="section">
+      <div class="section-heading">
+        <p class="eyebrow">Falsifiable predictions</p>
+        <h2>What would make this hypothesis stronger or weaker?</h2>
+      </div>
+      <div class="prediction-grid">
+        <article class="prediction-card">
+          <h3>Prediction A</h3>
+          <p>
+            Within 24 months, more high-trust workflows will ship with bounded,
+            local, or semi-local models instead of pure cloud calls.
+          </p>
+        </article>
+        <article class="prediction-card">
+          <h3>Prediction B</h3>
+          <p>
+            Artifact size budgets will become an explicit benchmark axis in
+            more model competitions and product evaluations.
+          </p>
+        </article>
+        <article class="prediction-card">
+          <h3>Prediction C</h3>
+          <p>
+            User interfaces for narrow domains will increasingly be generated
+            from policy graphs rather than hand-written from scratch.
+          </p>
+        </article>
+        <article class="prediction-card">
+          <h3>Prediction D</h3>
+          <p>
+            If tiny domain models fail to maintain useful quality under severe
+            compression, this theory weakens substantially.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section quote-section">
+      <div class="quote-card">
+        <p class="quote">
+          The strongest alternative to the black-box cloud generalist may be a
+          glass-box artifact: small enough to move, narrow enough to trust, and
+          structured enough to audit.
+        </p>
+      </div>
+    </section>
+
+    <section id="sources" class="section">
+      <div class="section-heading">
+        <p class="eyebrow">Source trail</p>
+        <h2>Primary materials inspected for this note</h2>
+      </div>
+      <div class="sources-list">
+        <a href="https://www.coderelay.io/fontemon.html" target="_blank" rel="noreferrer">Fontemon live page</a>
+        <a href="https://github.com/mmulet/code-relay/blob/main/markdown/HowIDidIt.md" target="_blank" rel="noreferrer">Fontemon technical write-up</a>
+        <a href="https://github.com/mmulet/font-game-engine" target="_blank" rel="noreferrer">Font game engine repository</a>
+        <a href="https://fuglede.github.io/llama.ttf/" target="_blank" rel="noreferrer">llama.ttf project page</a>
+        <a href="https://github.com/harfbuzz/harfbuzz/blob/main/docs/wasm-shaper.md" target="_blank" rel="noreferrer">HarfBuzz Wasm shaper docs</a>
+        <a href="https://openai.com/index/parameter-golf/" target="_blank" rel="noreferrer">OpenAI Parameter Golf page</a>
+        <a href="https://github.com/openai/parameter-golf" target="_blank" rel="noreferrer">Parameter Golf repository</a>
+      </div>
+    </section>
   </main>
 
-  <!-- Footer -->
-  <footer class="footer">
-    <a href="#">About</a>
-    <a href="#">Terms</a>
-    <a href="#">Privacy</a>
-    <a href="mailto:mhendricks1290@gmail.com">Contact</a>
-  </footer>
-
-  <!-- Auth modal -->
-  <div class="overlay" id="overlay">
-    <div class="modal" id="modal">
-      <button class="modal-close" id="modal-close">&times;</button>
-
-      <!-- Step 1: Auth -->
-      <div class="step" id="step-auth">
-        <h2 class="modal-title">Get Started</h2>
-        <button class="oauth-btn" id="google-btn">
-          <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59a14.5 14.5 0 0 1 0-9.18l-7.98-6.19a24.0 24.0 0 0 0 0 21.56l7.98-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
-          Continue with Google
-        </button>
-        <div class="divider"><span>or</span></div>
-        <form id="email-form">
-          <input type="email" id="auth-email" placeholder="you@example.com" required />
-          <button type="submit" class="email-submit">Continue with Email</button>
-        </form>
-      </div>
-
-      <!-- Step 2: Idea input -->
-      <div class="step hidden" id="step-idea">
-        <h2 class="modal-title">What's your idea?</h2>
-        <form id="idea-form">
-          <textarea id="idea" placeholder="Describe your business idea..." required></textarea>
-          <button type="submit" class="cta" style="width:100%">Launch Cofounder</button>
-        </form>
-      </div>
-
-      <!-- Step 3: Running -->
-      <div class="step hidden" id="step-running">
-        <h2 class="modal-title">Building your company...</h2>
-        <pre class="terminal" id="terminal"></pre>
-      </div>
+  <footer class="site-footer">
+    <div>Built as a TinyCrops GitHub Pages research microsite.</div>
+    <div class="footer-links">
+      <a href="#thesis">Back to thesis</a>
+      <a href="#sources">Sources</a>
     </div>
-  </div>
+  </footer>
 
   <script src="./config.js"></script>
   <script src="./app.js"></script>

@@ -1,10 +1,12 @@
-# Cofounder Frontend (Public)
+# TinyCrops Research Microsite
 
-Static frontend hosted on GitHub Pages.
+Static GitHub Pages site for an exploratory hypothesis:
+
+`Fontemon + llama.ttf + parameter-golf -> domain-specific superintelligence artifacts`
 
 - Deploy root: `frontend/`
 - Live URL: `https://tinycrops.github.io/cofounder-frontend-pages/`
-- Backend: private FastAPI behind Tailscale Funnel
+- Publish mode: GitHub Actions Pages deploy via `.github/workflows/pages.yml`
 
 ## Local preview
 
@@ -14,14 +16,12 @@ python3 -m http.server 8080
 # open http://localhost:8080
 ```
 
-## Configure backend URL
+## Deployment
 
-Edit `frontend/config.js`:
+Push to `main` over the SSH remote:
 
-```js
-window.CONFIG = {
-  BACKEND_URL: "https://<machine>.tail<hash>.ts.net/cofounder-api",
-};
+```bash
+git push origin main
 ```
 
-If `BACKEND_URL` is empty, frontend stays functional with fallback behavior.
+GitHub Actions uploads `frontend/` as the Pages artifact and deploys it.
