@@ -269,7 +269,9 @@ body {
 
 .thesis-grid,
 .prediction-grid,
-.architecture-grid {
+.architecture-grid,
+.paper-grid,
+.paper-summary-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 16px;
@@ -286,6 +288,62 @@ body {
 
 .big-callout {
   margin-top: 18px;
+}
+
+.paper-card,
+.results-board {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  padding: 22px;
+  box-shadow: var(--shadow);
+}
+
+.paper-grid {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.paper-meta {
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+
+.paper-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.results-board {
+  margin-top: 18px;
+}
+
+.results-head {
+  margin-bottom: 16px;
+}
+
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.result-tile {
+  padding: 16px;
+  border-radius: 18px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.48);
+}
+
+.result-tile strong {
+  display: block;
+  font-family: var(--serif);
+  font-size: 34px;
+  margin-bottom: 8px;
 }
 
 .comparison-table {
@@ -417,6 +475,10 @@ body {
   border-radius: 24px;
   padding: 22px;
   box-shadow: var(--shadow);
+}
+
+.prototype-footnote {
+  grid-column: span 2;
 }
 
 .prototype-input-card,
@@ -627,7 +689,10 @@ body {
   .architecture-grid,
   .prediction-grid,
   .thesis-grid,
-  .prototype-grid {
+  .prototype-grid,
+  .paper-grid,
+  .paper-summary-grid,
+  .results-grid {
     grid-template-columns: 1fr;
   }
 
@@ -646,7 +711,8 @@ body {
   }
 
   .prototype-input-card,
-  .prototype-output-card {
+  .prototype-output-card,
+  .prototype-footnote {
     grid-column: span 1;
   }
 

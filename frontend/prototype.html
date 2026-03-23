@@ -28,15 +28,16 @@
   <main>
     <section class="hero prototype-hero">
       <div class="hero-copy">
-        <p class="eyebrow">Basic system prototype</p>
+        <p class="eyebrow">Paper-aligned system prototype</p>
         <h1>
           A tiny model, a visible policy graph,
           and a constrained output shell.
         </h1>
         <p class="lede">
-          This prototype uses a narrow software-release triage domain to show
-          the idea in miniature. It does not freeform-answer. It classifies,
-          routes, constrains, and explains.
+          This prototype translates the two Princeton papers into a browser
+          demo. It uses a narrow software-release triage domain to show the
+          intended pattern: small model, explicit policy layer, constrained
+          output, and audit trail.
         </p>
         <div class="hero-actions">
           <a class="button primary" href="#console">Run the Console</a>
@@ -75,6 +76,8 @@
           <p class="caption">
             Enter a change request or select a sample. The tiny domain model
             will score it, then a policy graph will constrain what happens next.
+            This is a deliberately tiny stand-in for the “abstraction first,
+            then generalization” training logic in the papers.
           </p>
           <div class="sample-row">
             <button class="sample-chip" data-sample="We are changing checkout payment routing and refund handling before Friday.">
@@ -155,6 +158,17 @@
           </p>
         </article>
       </div>
+
+      <article class="prototype-card prototype-footnote">
+        <h3>How this maps to the papers</h3>
+        <p>
+          The console is not pretending to replicate the medical KG result.
+          Instead, it prototypes the software shape implied by the papers:
+          a small specialist reasoner, a visible rule or graph layer, and a
+          user-facing glass-box artifact that surfaces its route and proof
+          rather than hiding them behind a generic chat response.
+        </p>
+      </article>
     </section>
   </main>
 

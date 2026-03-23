@@ -27,6 +27,7 @@
     </div>
     <nav class="site-nav">
       <a href="#thesis">Thesis</a>
+      <a href="#papers">Papers</a>
       <a href="#evidence">Evidence</a>
       <a href="#architecture">Architecture</a>
       <a href="#predictions">Predictions</a>
@@ -39,14 +40,14 @@
       <div class="hero-copy">
         <p class="eyebrow">Exploratory hypothesis website</p>
         <h1>
-          The next practical AI form factor may be the
-          <span>artifact</span>, not the app.
+          Princeton’s DSS papers suggest a future of
+          <span>small, verifiable AI artifacts</span>.
         </h1>
         <p class="lede">
-          We propose that three seemingly strange projects point to the same
-          scientific direction: useful intelligence can be made smaller,
-          more local, more inspectable, and more domain-bounded than the
-          current cloud-first generalist paradigm suggests.
+          This research note now anchors its thesis in two 2026 Princeton papers:
+          one empirical paper on knowledge-graph-derived process rewards for
+          compositional medical reasoning, and one broader thesis arguing for
+          domain-specific superintelligence over monolithic AGI scaling.
         </p>
         <div class="hero-actions">
           <a class="button primary" href="#thesis">Read the Hypothesis</a>
@@ -75,20 +76,20 @@
 
     <section class="metrics-band" aria-label="Research metrics">
       <div class="metric">
-        <div class="metric-value">3</div>
-        <div class="metric-label">independent signals</div>
+        <div class="metric-value">14B</div>
+        <div class="metric-label">specialist model in the core KG paper</div>
       </div>
       <div class="metric">
-        <div class="metric-value">&lt; 16 MB</div>
-        <div class="metric-label">artifact pressure in parameter-golf</div>
+        <div class="metric-value">1-3 → 4-5</div>
+        <div class="metric-label">hop generalization claim</div>
       </div>
       <div class="metric">
-        <div class="metric-value">local</div>
-        <div class="metric-label">execution direction</div>
+        <div class="metric-value">+11.1%</div>
+        <div class="metric-label">reported gain on unseen 5-hop tasks</div>
       </div>
       <div class="metric">
-        <div class="metric-value">auditable</div>
-        <div class="metric-label">preferred system property</div>
+        <div class="metric-value">~1%</div>
+        <div class="metric-label">option-shuffling robustness drop</div>
       </div>
     </section>
 
@@ -125,10 +126,112 @@
       </div>
     </section>
 
+    <section id="papers" class="section">
+      <div class="section-heading">
+        <p class="eyebrow">Research anchor</p>
+        <h2>Two Princeton papers now sit at the center of this site.</h2>
+      </div>
+
+      <div class="paper-grid">
+        <article class="paper-card">
+          <div class="paper-meta">Empirical paper</div>
+          <h3>Knowledge Graphs are Implicit Reward Models</h3>
+          <p>
+            The evidence paper. It trains a Qwen3 14B model on short-hop
+            medical reasoning and uses knowledge-graph path signals during RL
+            to improve zero-shot generalization to longer-hop tasks.
+          </p>
+          <div class="tag-row">
+            <span class="tag good">KG-path reward</span>
+            <span class="tag good">SFT + GRPO</span>
+            <span class="tag good">Compositional generalization</span>
+          </div>
+          <div class="paper-links">
+            <a class="inline-link" href="./papers/2601.15160v3.pdf" target="_blank" rel="noreferrer">Open local PDF</a>
+            <a class="inline-link" href="https://arxiv.org/abs/2601.15160" target="_blank" rel="noreferrer">Open arXiv</a>
+          </div>
+        </article>
+
+        <article class="paper-card">
+          <div class="paper-meta">Thesis paper</div>
+          <h3>An Alternative Trajectory for Generative AI</h3>
+          <p>
+            The architecture paper. It argues that abstraction-first,
+            domain-specific superintelligence and societies of specialist models
+            are a better long-run path than brute-force scaling of monolithic
+            generalist systems.
+          </p>
+          <div class="tag-row">
+            <span class="tag warn">DSS societies</span>
+            <span class="tag warn">Edge deployment</span>
+            <span class="tag warn">Neurosymbolic stack</span>
+          </div>
+          <div class="paper-links">
+            <a class="inline-link" href="./papers/2603.14147v1.pdf" target="_blank" rel="noreferrer">Open local PDF</a>
+            <a class="inline-link" href="https://arxiv.org/abs/2603.14147" target="_blank" rel="noreferrer">Open arXiv</a>
+          </div>
+        </article>
+      </div>
+
+      <div class="paper-summary-grid">
+        <article class="glass-card">
+          <h3>What is evidence here?</h3>
+          <p>
+            The strongest evidence is narrow and specific: structured
+            path-derived reward signals appear to improve specialist
+            compositional reasoning on a medical benchmark more effectively
+            than scale alone.
+          </p>
+        </article>
+        <article class="glass-card">
+          <h3>What is still speculative?</h3>
+          <p>
+            The bigger DSS vision is still an architectural hypothesis. The
+            “Pocket Sage,” labor-market, and infrastructure arguments are
+            compelling, but they remain broader extrapolations rather than
+            experimentally settled facts.
+          </p>
+        </article>
+        <article class="glass-card">
+          <h3>Our synthesis</h3>
+          <p>
+            Paper one gives the mechanism. Paper two gives the system design.
+            This website explores what happens if we take both seriously and
+            build artifact-native, audit-friendly user layers around them.
+          </p>
+        </article>
+      </div>
+
+      <article class="results-board">
+        <div class="results-head">
+          <h3>Numbers that matter</h3>
+          <p class="caption">These are the paper results that most directly shaped the current TinyCrops prototype direction.</p>
+        </div>
+        <div class="results-grid">
+          <div class="result-tile">
+            <strong>+7.5%</strong>
+            <span>reported improvement on unseen 4-hop tasks vs SFT-only</span>
+          </div>
+          <div class="result-tile">
+            <strong>+11.1%</strong>
+            <span>reported improvement on unseen 5-hop tasks vs SFT-only</span>
+          </div>
+          <div class="result-tile">
+            <strong>56.75%</strong>
+            <span>reported accuracy on hardest difficulty level after SFT+RL</span>
+          </div>
+          <div class="result-tile">
+            <strong>82.20%</strong>
+            <span>best 8B ablation result from path alignment + negative binary reward</span>
+          </div>
+        </div>
+      </article>
+    </section>
+
     <section id="evidence" class="section">
       <div class="section-heading">
         <p class="eyebrow">Evidence triad</p>
-        <h2>Three projects illuminate three distinct layers of the same future stack.</h2>
+        <h2>Three earlier signals still matter, but now they sit downstream of the papers.</h2>
       </div>
 
       <div class="comparison-table">
@@ -189,8 +292,9 @@
             <text x="510" y="225">parameter-golf style</text>
           </svg>
           <p class="caption">
-            The projects do not compete directly. Together they hint at a stack:
-            shell, runtime, and compressed intelligence.
+            The projects do not compete directly. Read through the Princeton
+            papers, they become implementation hints: shell, runtime, and
+            compressed intelligence.
           </p>
         </article>
 
@@ -337,6 +441,10 @@
         <a href="https://github.com/harfbuzz/harfbuzz/blob/main/docs/wasm-shaper.md" target="_blank" rel="noreferrer">HarfBuzz Wasm shaper docs</a>
         <a href="https://openai.com/index/parameter-golf/" target="_blank" rel="noreferrer">OpenAI Parameter Golf page</a>
         <a href="https://github.com/openai/parameter-golf" target="_blank" rel="noreferrer">Parameter Golf repository</a>
+        <a href="./papers/2601.15160v3.pdf" target="_blank" rel="noreferrer">Local PDF: Knowledge Graphs are Implicit Reward Models</a>
+        <a href="./papers/2603.14147v1.pdf" target="_blank" rel="noreferrer">Local PDF: An Alternative Trajectory for Generative AI</a>
+        <a href="https://arxiv.org/abs/2601.15160" target="_blank" rel="noreferrer">arXiv: 2601.15160</a>
+        <a href="https://arxiv.org/abs/2603.14147" target="_blank" rel="noreferrer">arXiv: 2603.14147</a>
       </div>
     </section>
   </main>
